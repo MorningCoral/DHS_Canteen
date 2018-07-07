@@ -35,7 +35,7 @@
     <div class='btn'><v-icon @click.stop='drawer = !drawer'>menu</v-icon></div>
     <v-toolbar-title class='white--text'>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
-    <div class='btn'><v-icon left>search</v-icon></div>
+    <router-link :to="{path: '/search'}" id="searchlink"><div class='btn'><v-icon left>search</v-icon></div></router-link>
     <v-chip label color='pink' text-color='white' id='cart-btn'>
       <v-icon left id='cart-icon'> shopping_cart </v-icon><span id='cart-count'>0</span>
     </v-chip>
@@ -70,6 +70,10 @@
 }
 .sidebar-tile.router-link-active {
   color: green;
+}
+
+#searchlink {
+  text-decoration: none;
 }
 
 </style>

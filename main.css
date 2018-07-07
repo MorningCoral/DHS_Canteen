@@ -26,7 +26,14 @@
   color: crimson;
 }
 
-ul > li {
-    display: inline-block;
-    margin-right: 20px;
+ul {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
 }
+
+li {
+	padding: 8px 16px;
+	border-bottom: 1px solid #eee;
+}
+
