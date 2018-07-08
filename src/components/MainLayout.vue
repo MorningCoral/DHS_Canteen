@@ -2,7 +2,7 @@
   <div>
   <v-navigation-drawer 
     v-model='drawer' 
-    light overflow absolute
+    light overflow absolute stateless
     :width='200'
     >
     <v-toolbar flat class='transparent'>
@@ -44,7 +44,6 @@
 </template>
 
 <style scoped>
-
 .btn {
   background: pink;
   padding: 3px;
@@ -53,7 +52,7 @@
   margin-left: 15px;
 }
 #cart-icon {
-  margin-right: 5px; 
+  margin-right: 5px;
 }
 #cart-count {
   font-size: 3vh;
@@ -75,20 +74,19 @@
 #searchlink {
   text-decoration: none;
 }
-
 </style>
 
 <script>
 export default {
-  props: ['title'],
+  props: ["title"],
   data: function data() {
-    return { 
-			drawer: null,
+    return {
+      drawer: null,
       pages: [
-        { title: '1.  Chicken Rice', link: '/stall1' },
-        { title: '2.  Malay', link: '/stall2' }
-      ],
-		};
+        { title: "1.  Chicken Rice", link: "/stall1" },
+        { title: "2.  Malay", link: "/stall2" }
+      ]
+    };
   }
-}
+};
 </script>
