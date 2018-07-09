@@ -1,4 +1,5 @@
 var stall1_items = [
+  { header: "1. Chicken Rice" },
   {
     name: "Spaghetti",
     price: "$ 2.00",

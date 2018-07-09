@@ -31,7 +31,7 @@
 
     <!-- Food List -->
     <div class="content pa-2">
-      <v-layout row="row" wrap="wrap">
+      <v-layout row wrap>
         <v-flex class="pa-2" xs6 v-for="item in sortedItems" :key="item.name">
           <v-card tile>
             <v-card-media :src="item.pic" height="120px"></v-card-media>
