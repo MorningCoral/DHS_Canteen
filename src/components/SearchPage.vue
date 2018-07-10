@@ -29,16 +29,30 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-autocomplete
-        :items="combined"
+        :items="selectedItems"
         clearable
         item-text="name"
         item-value="null"
         label="Search for food"
         solo
+        no-data-text="Not found"
       >
+      <template
+        slot="item"
+        slot-scope="data"
+      >
+              
+        <template>
+          <v-list-tile-content>
+            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+            <v-list-tile-sub-title v-html="data.item.stall"></v-list-tile-sub-title>
+          </v-list-tile-content>
+          <v-list-tile-action>
+                  <v-list-tile-action-text>{{ data.item.price }}</v-list-tile-action-text>
+          </v-list-tile-action>
+        </template>
+      </template>
       </v-autocomplete>
-      <p>{{ selectedStalls }}</p>
-      <p>{{ combined }}</p>
 
   </div>
   </v-app>
@@ -74,17 +88,14 @@ export default {
         { name: "1. Chicken Rice", value: 1 },
         { name: "2. Malay", value: 2 }
       ],
-      stallitems: [stall1_items, stall2_items],
-      divider: [{ divider: true }],
-      stallsoption: ["1. Chicken Rice", "2. Malay"],
       selectedStalls: []
     };
   },
   methods: {
     sortarr(arr) {
       return arr.sort(function(a, b) {
-        if (a["name"] < b["name"]) return -1;
-        if (a["name"] > b["name"]) return 1;
+        if (a < b) return -1;
+        if (a > b) return 1;
         return 0;
       });
     }
@@ -106,13 +117,20 @@ export default {
         this.selectedStalls = selectedStalls;
       }
     },
-    combined: function() {
-      var S1 = this.sortarr(stall1_items);
-      var S2 = this.sortarr(stall2_items);
-      var combineditems = [];
-      combineditems = combineditems.concat(S1);
-      combineditems = combineditems.concat(S2);
-      return combineditems;
+    sortedStalls: function() {
+      return this.sortarr(this.selectedStalls);
+    },
+    selectedItems: function() {
+      var allitems = [stall1_items, stall2_items];
+      var header = [{ header: "1. Chicken Rice" }, { header: "2. Malay" }];
+      var divider = [{ divider: true }];
+      var selectedItems = [];
+      this.sortedStalls.forEach(function(value) {
+        selectedItems = selectedItems.concat(header[value - 1]);
+        selectedItems = selectedItems.concat(allitems[value - 1]);
+        selectedItems = selectedItems.concat(divider);
+      });
+      return selectedItems;
     }
   }
 };
