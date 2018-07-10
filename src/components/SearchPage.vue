@@ -50,6 +50,7 @@
           <v-list-tile-action>
                   <v-list-tile-action-text>{{ data.item.price }}</v-list-tile-action-text>
           </v-list-tile-action>
+
         </template>
       </template>
       </v-autocomplete>
@@ -122,13 +123,9 @@ export default {
     },
     selectedItems: function() {
       var allitems = [stall1_items, stall2_items];
-      var header = [{ header: "1. Chicken Rice" }, { header: "2. Malay" }];
-      var divider = [{ divider: true }];
       var selectedItems = [];
       this.sortedStalls.forEach(function(value) {
-        selectedItems = selectedItems.concat(header[value - 1]);
         selectedItems = selectedItems.concat(allitems[value - 1]);
-        selectedItems = selectedItems.concat(divider);
       });
       return selectedItems;
     }

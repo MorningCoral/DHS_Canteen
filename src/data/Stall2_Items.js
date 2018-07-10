@@ -2,25 +2,25 @@ var stall2_items = [
   {
     name: "Chicken",
     price: "$ 2.00",
-    stall: "Stall 2",
+    stall: "#2 - Malay",
     tab: "Meat"
   },
   {
     name: "Fried Fish",
     price: "$ 1.00",
-    stall: "Stall 2",
+    stall: "#2 - Malay",
     tab: "Meat"
   },
   {
     name: "Cabbage",
     price: "$ 0.80",
-    stall: "Stall 2",
+    stall: "#2 - Malay",
     tab: "Veg"
   },
   {
     name: "Beans",
     price: "$ 1.00",
-    stall: "Stall 2",
+    stall: "#2 - Malay",
     tab: "Veg"
   }
 ];
