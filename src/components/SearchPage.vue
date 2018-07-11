@@ -35,7 +35,7 @@
         item-value="null"
         label="Search for food"
         solo
-        no-data-text="Not found"
+        no-data-text="No results"
       >
       <template
         slot="item"

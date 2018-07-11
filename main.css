@@ -1,8 +1,8 @@
-@import '../node_modules/vuetify/src/stylus/main.styl';
+@import "../node_modules/vuetify/src/stylus/main.styl";
 
 .tab-content {
-	background: cyan;
-	height: 100%;
+  background: cyan;
+  height: 100%;
 }
 .nav {
   background-color: white;
@@ -21,19 +21,3 @@
 .nav li + li {
   margin-left: 1rem;
 }
-
-.router-link-active {
-  color: crimson;
-}
-
-ul {
-	margin-left: 0;
-	padding-left: 0;
-	list-style: none;
-}
-
-li {
-	padding: 8px 16px;
-	border-bottom: 1px solid #eee;
-}
-

@@ -13,40 +13,77 @@
         {{ tab.name }}</v-tab>
     </v-tabs>
 
-    <!-- Sort buttons -->
-    <div>
-      <div style="display: inline-block" class="mx-5">
-        <v-btn-toggle v-model="sorttype" mandatory>
-          <v-btn flat value='name' depressed> Name </v-btn>
-          <v-btn flat value='price' depressed> Price </v-btn>
+    <!-- Items display setting buttons -->
+    <div class="mt-2 items-display-settings">
+      <div>
+        <v-btn-toggle v-model="sortType" mandatory id="sort-type">
+          <v-btn flat value='name'><v-icon>sort_by_alpha</v-icon></v-btn>
+          <v-btn flat value='price'><v-icon>attach_money</v-icon></v-btn>
         </v-btn-toggle>
       </div>
-      <div style="display: inline-block" >
-        <v-btn-toggle v-model="sortdirection" mandatory>
-          <v-btn flat value='asc' depressed> asc </v-btn>
-          <v-btn flat value='desc' depressed> desc </v-btn>
+      <div>
+        <v-btn-toggle v-model="sortDirection" mandatory id="sort-direction">
+          <v-btn flat value='asc'><v-icon>arrow_upward</v-icon></v-btn>
+          <v-btn flat value='desc'><v-icon>arrow_downward</v-icon></v-btn>
+        </v-btn-toggle>
+      </div>
+      <div>
+        <v-btn-toggle v-model="gridList" mandatory id="grid-list">
+          <v-btn flat value='grid'><v-icon>view_module</v-icon></v-btn>
+          <v-btn flat value='list'><v-icon>view_list</v-icon></v-btn>
         </v-btn-toggle>
       </div>
     </div>
 
-    <!-- Food List -->
-    <div class="content pa-2">
-      <v-layout row wrap>
-        <v-flex class="pa-2" xs6 v-for="item in sortedItems" :key="item.name">
-          <v-card tile>
-            <v-card-media :src="item.pic" height="120px"></v-card-media>
-              <div class='pa-1 pl-2'>
-                <span class="body-2">{{ item.name }}</span>
-                <v-spacer></v-spacer>
-                <span class="caption">{{ item.price }}</span>
-              </div>	
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </div>    
+    <!-- Food List View -->
+    <template v-if="gridList === 'grid'">
+      <div class="content pa-2">
+        <v-layout row wrap>
+          <v-flex class="pa-2" xs6 v-for="item in sortedItems" :key="item.name">
+            <v-card tile>
+              <v-card-media :src="item.pic" height="120px"></v-card-media>
+                <div class='pa-1 pl-2'>
+                  <span class="body-2">{{ item.name }}</span>
+                  <v-spacer></v-spacer>
+                  <span>{{ item.price }}</span>
+                </div>	
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </div>
+    </template>
+
+    <!-- Food Grid View -->
+    <template v-if="gridList === 'list'">
+      <div class="content pa-2">
+        <v-layout row wrap>
+          <v-flex class="pa-0" xs6 v-for="item in sortedItems" :key="item.name">
+            <v-card tile class="pa-1 pr-2">
+                <div class='pa-1 pl-2'>
+                  <span>{{ item.name }}</span>
+                  <span style="float: right">{{ item.price }}</span>
+                </div>	
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </div> 
+    </template>    
 
   </v-app>
 </template>
+
+<style>
+.items-display-settings > div {
+  display: inline-block;
+}
+#sort-type {
+  margin-left: 15vw;
+}
+#sort-direction,
+#grid-list {
+  margin-left: 15px;
+}
+</style>
 
 
 <script>
@@ -63,8 +100,9 @@ export default {
       items: stall2_items,
       selectedTab: "All",
       toggle_exclusive: 2,
-      sorttype: [],
-      sortdirection: []
+      sortType: [],
+      sortDirection: [],
+      gridList: []
     };
   },
   methods: {
@@ -94,7 +132,7 @@ export default {
       }
     },
     sortedItems: function() {
-      return this.sortBy(this.tabSorted, this.sorttype, this.sortdirection);
+      return this.sortBy(this.tabSorted, this.sortType, this.sortDirection);
     }
   },
   components: {

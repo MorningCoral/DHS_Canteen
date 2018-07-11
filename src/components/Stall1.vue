@@ -9,17 +9,18 @@
         >
         {{ tab.name }}</v-tab>
     </v-tabs>
-    <v-data-table
-      :headers="headers"
-      :items="filteredItems"
-      hide-actions
-      must-sort
-    >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.price }}</td>
-      </template>
-    </v-data-table>
+    <div class="content pa-2">
+      <v-layout row wrap>
+        <v-flex class="pa-0" xs6 v-for="item in filteredItems" :key="item.name">
+          <v-card tile class="pa-1 pr-2">
+              <div class='pa-1 pl-2'>
+                <span>{{ item.name }}</span>
+                <span style="float: right">{{ item.price }}</span>
+              </div>	
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </div> 
 
   </v-app>
 </template>
@@ -35,8 +36,8 @@ export default {
     return {
       header: "Chicken Rice",
       headers: [
-        { text: "Name", value: "name" },
-        { text: "Price", value: "price" }
+        { text: "NAME", value: "name" },
+        { text: "PRICE", value: "price" }
       ],
       drawer: null,
       tabs: [{ name: "All" }, { name: "Main" }, { name: "Sides" }],

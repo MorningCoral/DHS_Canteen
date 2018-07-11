@@ -2,7 +2,7 @@
   <div>
   <v-navigation-drawer 
     v-model='drawer' 
-    light overflow absolute stateless
+    light overflow absolute
     :width='200'
     >
     <v-toolbar flat class='transparent'>
