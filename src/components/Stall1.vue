@@ -1,27 +1,9 @@
 <template>
   <v-app>
-    <mainlayout :title='header'></mainlayout>
-    <v-tabs centered grow color='primary' dark slider-color='pink'>
-        <v-tab 
-          v-for='tab in tabs'
-          :key='tab.name' 
-          @click='selectedTab = tab.name' 
-        >
-        {{ tab.name }}</v-tab>
-    </v-tabs>
-    <div class="content pa-2">
-      <v-layout row wrap>
-        <v-flex class="pa-0" xs6 v-for="item in filteredItems" :key="item.name">
-          <v-card tile class="pa-1 pr-2">
-              <div class='pa-1 pl-2'>
-                <span>{{ item.name }}</span>
-                <span style="float: right">{{ item.price }}</span>
-              </div>	
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </div> 
-
+    <mainlayout 
+      :title='header'
+      :tabs='stalltabs'
+      :items="stallitems"></mainlayout>
   </v-app>
 </template>
 
@@ -31,34 +13,14 @@ import mainlayout from "./MainLayout";
 import stall1_items from "../data/Stall1_Items.js";
 
 export default {
-  name: "Stall1",
   data: function data() {
     return {
       header: "Chicken Rice",
-      headers: [
-        { text: "NAME", value: "name" },
-        { text: "PRICE", value: "price" }
-      ],
-      drawer: null,
-      tabs: [{ name: "All" }, { name: "Main" }, { name: "Sides" }],
-      items: stall1_items,
-      selectedTab: "All"
+      stalltabs: [{ name: "All" }, { name: "Main" }, { name: "Sides" }],
+      stallitems: stall1_items
     };
   },
-  computed: {
-    filteredItems: function() {
-      var vm = this;
-      var tab = vm.selectedTab;
-
-      if (tab === "All") {
-        return vm.items;
-      } else {
-        return vm.items.filter(function(item) {
-          return item.tab === tab;
-        });
-      }
-    }
-  },
+  computed: {},
   components: {
     mainlayout
   }
