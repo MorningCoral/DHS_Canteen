@@ -16,7 +16,7 @@ export default {
   data: function data() {
     return {
       header: "Malay 1",
-      stalltabs: [{ name: "All" }, { name: "Meat" }, { name: "Veg" }],
+      stalltabs: ["All", "Meat", "Veg"],
       stallitems: stall2_items
     };
   },

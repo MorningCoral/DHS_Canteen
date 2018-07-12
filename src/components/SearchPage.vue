@@ -8,7 +8,7 @@
       <v-btn> GO BACK </v-btn>
     </router-link>
 
-    <v-expansion-panel>
+    <v-expansion-panel @click>
       <v-expansion-panel-content  class="pa-0">
         <div slot="header">Filter Stalls</div>
               <v-layout class="grey lighten-3 px-2" row wrap>
@@ -16,7 +16,7 @@
                 <v-chip><v-checkbox 
                           type="checkbox" 
                           label="All"
-                          v-model="selectAll"></v-checkbox></v-chip>
+                          v-model="selectAll" ></v-checkbox></v-chip>
                   <v-chip v-for="stall in stalls" :key='stall.name'><v-checkbox 
                       type="checkbox"  
                       v-model="selectedStalls"
@@ -85,6 +85,7 @@ export default {
   name: "Search",
   data: function data() {
     return {
+      All: "All",
       stalls: [
         { name: "1. Chicken Rice", value: 1 },
         { name: "2. Malay", value: 2 }

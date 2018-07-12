@@ -47,15 +47,15 @@
     <v-tabs centered grow color='primary' dark slider-color='pink'>
         <v-tab 
           v-for='tab in tabs'
-          :key='tab.name' 
-          @click='selectedTab = tab.name' 
+          :key='tab' 
+          @click='selectedTab = tab' 
         >
-        {{ tab.name }}</v-tab>
+        {{ tab }}</v-tab>
     </v-tabs>
 
    <!-- Items display setting buttons -->
    <v-layout row wrap>
-    <div class="mt-2 items-display-settings">
+    <div class="mt-2 pl-2 items-display-settings">
         <v-btn-toggle v-model="sortType" mandatory class="mx-2" >
           <v-btn flat value='name'><v-icon>sort_by_alpha</v-icon></v-btn>
           <v-btn flat value='price'><v-icon>attach_money</v-icon></v-btn>
@@ -70,10 +70,14 @@
           <v-btn flat value='grid'><v-icon>view_module</v-icon></v-btn>
           <v-btn flat value='list'><v-icon>view_list</v-icon></v-btn>
         </v-btn-toggle>
+        <v-btn-toggle v-model="splitFullView" mandatory class="mx-2" v-if="gridList === 'list'">
+          <v-btn flat value='split'><v-icon>vertical_split</v-icon></v-btn>
+          <v-btn flat value='full'><v-icon>view_headline</v-icon></v-btn>
+        </v-btn-toggle>
     </div>
    </v-layout>
 
-    <!-- Food List View -->
+    <!-- Food Grid View -->
     <template v-if="gridList === 'grid'">
       <div class="content pa-2">
         <v-layout row wrap>
@@ -91,11 +95,19 @@
       </div>
     </template>
 
-    <!-- Food Grid View -->
+    <!-- Food List View -->
     <template v-if="gridList === 'list'">
       <div class="content pa-2">
         <v-layout row wrap>
-          <v-flex class="pa-0" xs6 v-for="item in sortedFilteredItems" :key="item.name">
+          <v-flex v-if="splitFullView === 'split'" class="pa-0" xs6 v-for="item in sortedFilteredItems" :key="item.name">
+            <v-card tile class="pa-1 pr-2">
+                <div class='pa-1 pl-2'>
+                  <span>{{ item.name }}</span>
+                  <span style="float: right">{{ item.price }}</span>
+                </div>	
+            </v-card>
+          </v-flex>
+          <v-flex v-if="splitFullView === 'full'" class="pa-0" xs12 v-for="item in sortedFilteredItems" :key="item.name">
             <v-card tile class="pa-1 pr-2">
                 <div class='pa-1 pl-2'>
                   <span>{{ item.name }}</span>
@@ -121,6 +133,7 @@ export default {
       sortType: [],
       sortDirection: [],
       gridList: [],
+      splitFullView: [],
       pages: [
         { title: "1.  Chicken Rice", link: "/stall1" },
         { title: "2.  Malay", link: "/stall2" }
@@ -146,7 +159,6 @@ export default {
     // Tab filter
     tabFilteredItems: function() {
       var tab = this.selectedTab;
-
       if (tab === "All") {
         return this.items;
       } else {
@@ -181,12 +193,10 @@ export default {
 #cart-count {
   font-size: 3vh;
 }
-
 #drawer-header {
   font-size: 25px;
   text-align: center;
 }
-
 .sidebar-tile {
   text-decoration: none;
   color: black;
@@ -194,11 +204,9 @@ export default {
 .sidebar-tile.router-link-active {
   color: green;
 }
-
 #searchlink {
   text-decoration: none;
 }
-
 // Items display settings
 .items-display-settings > div {
   display: inline-block;

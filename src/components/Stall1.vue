@@ -16,7 +16,7 @@ export default {
   data: function data() {
     return {
       header: "Chicken Rice",
-      stalltabs: [{ name: "All" }, { name: "Main" }, { name: "Sides" }],
+      stalltabs: ["All", "Main", "Sides"],
       stallitems: stall1_items
     };
   },
