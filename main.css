@@ -21,3 +21,7 @@
 .nav li + li {
   margin-left: 1rem;
 }
+
+.link {
+  text-decoration: none;
+}

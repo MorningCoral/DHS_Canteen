@@ -4,11 +4,11 @@
     <h1>Search for</h1>
     <button></button>
     <router-link
-      :to="{ path: '/' }" >
+      :to="{ path: '/' }"  class="link">
       <v-btn> GO BACK </v-btn>
     </router-link>
 
-    <v-expansion-panel @click>
+    <v-expansion-panel>
       <v-expansion-panel-content  class="pa-0">
         <div slot="header">Filter Stalls</div>
               <v-layout class="grey lighten-3 px-2" row wrap>
@@ -45,10 +45,10 @@
         <template>
           <v-list-tile-content>
             <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-            <v-list-tile-sub-title v-html="data.item.stall"></v-list-tile-sub-title>
+            <v-list-tile-sub-title v-html="data.item.price"></v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-                  <v-list-tile-action-text>{{ data.item.price }}</v-list-tile-action-text>
+                  <v-list-tile-action-text>{{ data.item.stall }}</v-list-tile-action-text>
           </v-list-tile-action>
 
         </template>

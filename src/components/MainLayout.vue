@@ -36,11 +36,11 @@
       <v-toolbar-title style="width: 300vw" class='white--text'>{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- Search button-->
-      <router-link :to="{path: '/search'}" id="searchlink"><div class='btn'><v-icon left>search</v-icon></div></router-link>
+      <router-link :to="{path: '/search'}" class="link"><div class='btn'><v-icon left>search</v-icon></div></router-link>
       <!-- Cart button-->
-      <v-chip label color='pink' text-color='white' id='cart-btn'>
+      <router-link :to="{path: '/foodcart'}" class="link"><v-chip label color='pink' text-color='white' id='cart-btn'>
         <v-icon left id='cart-icon'> shopping_cart </v-icon><span id='cart-count'>0</span>
-      </v-chip>
+      </v-chip></router-link>
     </v-toolbar>
   
     <!-- Tabs -->
@@ -82,7 +82,7 @@
       <div class="content pa-2">
         <v-layout row wrap>
           <v-flex class="pa-2" xs6 v-for="item in sortedFilteredItems" :key="item.name">
-            <v-card tile>
+            <v-card tile @dblclick="addToCart(item)">
               <v-card-media :src="item.pic" height="120px"></v-card-media>
                 <div class='pa-1'>
                   <span class="body-2">{{ item.name }}</span>
@@ -126,18 +126,21 @@ export default {
   props: ["title", "tabs", "items"],
   data: function data() {
     return {
-      drawer: null, // Side Menu
-      selectedTab: "All", // Tab filtering
+      // Side Menu
+      drawer: null,
+      pages: [
+        { title: "1.  Chicken Rice", link: "/stall1" },
+        { title: "2.  Malay", link: "/stall2" }
+      ],
+      // Tab filtering
+      selectedTab: "All",
       // Items display setting
       toggle_exclusive: 2,
       sortType: [],
       sortDirection: [],
       gridList: [],
-      splitFullView: [],
-      pages: [
-        { title: "1.  Chicken Rice", link: "/stall1" },
-        { title: "2.  Malay", link: "/stall2" }
-      ]
+      splitFullView: []
+      // cart
     };
   },
   methods: {
@@ -153,6 +156,10 @@ export default {
         }
         return 0;
       });
+    },
+    // Add items to cart
+    addToCart(item) {
+      this.$store.dispatch("addItem", item);
     }
   },
   computed: {
@@ -203,9 +210,6 @@ export default {
 }
 .sidebar-tile.router-link-active {
   color: green;
-}
-#searchlink {
-  text-decoration: none;
 }
 // Items display settings
 .items-display-settings > div {
